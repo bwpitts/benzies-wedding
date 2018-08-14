@@ -11,8 +11,17 @@ import {
   TextInput
 } from 'react-native';
 import { WebBrowser } from 'expo';
-import CountDownComponent from '../components/Countdown';
 import { MonoText } from '../components/StyledText';
+
+function checkUser(userName, password){
+    if (userName === "Ben" && password === "Pitts"){
+      alert("Success")
+    } else if (userName === "Ben" && password !== "Pitts"){
+      alert("Wrong Password")
+    } else {
+      alert("Wrong Username or Password")
+    }
+}
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -21,18 +30,19 @@ export default class HomeScreen extends Component {
   constructor(props){
     super(props);
     this.state = {
-      userName: 'Username',
-      password: 'Password'
+      userName: '',
+      password: ''
     }
   }
+
   render() {
+
     return (
       <View style={styles.container}>
         <ImageBackground
             source={require('../assets/images/_57A5994.jpg')}
             style={styles.backgroundImage}>
-        <ScrollView style={styles.scrollContainer}>
-          <CountDownComponent/>
+        <View style={styles.scrollContainer}>
           <View style={styles.welcomeContainer}>
             <Image
               source={require('../assets/images/_O0A6731.jpg')}
@@ -48,20 +58,48 @@ export default class HomeScreen extends Component {
                 style={styles.textInput}
                 onChangeText={(userName) => this.setState({userName})}
                 value={this.state.userName}
+                placeholder="Username"
             />
 
             <TextInput
                 style={styles.textInput}
                 onChangeText={(password) => this.setState({password})}
                 value={this.state.password}
+                placeholder="Password"
+                secureTextEntry={true}
             />
 
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
+            <TouchableOpacity
+              onPress={() => checkUser(this.state.userName, this.state.password)}
+              style={{width: "100%"}}
+            >
+              <View style={styles.button}>
+                <Text>Log in</Text>
+              </View>
+            </TouchableOpacity>
+
+            <View style={{flexDirection: "row"}}>
+              <TouchableOpacity
+                onPress={()=> alert("Username: " + this.state.userName + " Password: " + this.state.password)}
+                style={{width: "48.5%", justifyContent: "flex-start", margin: 5}}
+              >
+                <View style={styles.button}>
+                  <Text>Create Account</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={()=> alert("Forgot Password")}
+                style={{width: "48.5%", justifyContent: "flex-end", margin: 5}}
+              >
+                <View style={styles.button}>
+                  <Text>Forgot Password</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
 
-        </ScrollView>
+        </View>
         </ImageBackground>
       </View>
     );
@@ -74,6 +112,15 @@ const styles = StyleSheet.create({
   },
   scrollContainer:{
     opacity: 1,
+  },
+  button:{
+    backgroundColor: "#478ac8",
+    width: "100%",
+    padding: 10,
+    alignItems: 'center',
+    borderColor: "#000",
+    borderWidth: .5,
+    borderRadius: 3
   },
   backgroundImage: {
     width: "100%",
@@ -102,7 +149,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
-    borderRadius: 20
   },
   getStartedContainer: {
     alignItems: 'center',
@@ -121,7 +167,7 @@ const styles = StyleSheet.create({
   },
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: '#fff',
     lineHeight: 24,
     textAlign: 'center',
   },
