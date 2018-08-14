@@ -11,7 +11,7 @@ import {
   TextInput
 } from 'react-native';
 import { WebBrowser } from 'expo';
-
+import CountDownComponent from '../components/Countdown';
 import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends Component {
@@ -32,6 +32,7 @@ export default class HomeScreen extends Component {
             source={require('../assets/images/_57A5994.jpg')}
             style={styles.backgroundImage}>
         <ScrollView style={styles.scrollContainer}>
+          <CountDownComponent/>
           <View style={styles.welcomeContainer}>
             <Image
               source={require('../assets/images/_O0A6731.jpg')}
