@@ -10,18 +10,18 @@ import {
   ImageBackground,
   TextInput
 } from 'react-native';
-import { WebBrowser } from 'expo';
-import { MonoText } from '../components/StyledText';
+import * as firebase from 'firebase';
 
-function checkUser(userName, password){
-    if (userName === "Ben" && password === "Pitts"){
-      alert("Success")
-    } else if (userName === "Ben" && password !== "Pitts"){
-      alert("Wrong Password")
-    } else {
-      alert("Wrong Username or Password")
-    }
-}
+const firebaseConfig = {
+    apiKey: "AIzaSyDGVk2nuWoDHRkHGbNm0hCLPLtDTGJ21f8",
+    authDomain: "benzies-wedding.firebaseapp.com",
+    databaseURL: "https://benzies-wedding.firebaseio.com",
+    projectId: "benzies-wedding",
+    storageBucket: "benzies-wedding.appspot.com",
+    messagingSenderId: "771684530202"
+};
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -31,8 +31,38 @@ export default class HomeScreen extends Component {
     super(props);
     this.state = {
       userName: '',
-      password: ''
+      password: '',
+      errorMessage: null,
+      currentUser: null
     }
+  }
+
+  authentication(){
+    firebase
+        .auth()
+        .signInWithEmailAndPassword(this.state.userName, this.state.password)
+        .then((data) => {
+          console.log(data.user.uid);
+        })
+        .catch(error => {
+          alert(error);
+        })
+  }
+
+  createAccount(){
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.userName, this.state.password)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch(error => {
+        alert(error);
+      })
+  }
+
+  forgotPassword(){
+    alert("Don't forget your password")
   }
 
   render() {
@@ -58,7 +88,7 @@ export default class HomeScreen extends Component {
                 style={styles.textInput}
                 onChangeText={(userName) => this.setState({userName})}
                 value={this.state.userName}
-                placeholder="Username"
+                placeholder="Email Address"
             />
 
             <TextInput
@@ -70,7 +100,7 @@ export default class HomeScreen extends Component {
             />
 
             <TouchableOpacity
-              onPress={() => checkUser(this.state.userName, this.state.password)}
+              onPress={() => this.authentication()}
               style={{width: "100%"}}
             >
               <View style={styles.button}>
@@ -80,7 +110,7 @@ export default class HomeScreen extends Component {
 
             <View style={{flexDirection: "row"}}>
               <TouchableOpacity
-                onPress={()=> alert("Username: " + this.state.userName + " Password: " + this.state.password)}
+                onPress={()=> this.createAccount()}
                 style={{width: "48.5%", justifyContent: "flex-start", margin: 5}}
               >
                 <View style={styles.button}>
@@ -89,7 +119,7 @@ export default class HomeScreen extends Component {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={()=> alert("Forgot Password")}
+                onPress={()=> this.forgotPassword()}
                 style={{width: "48.5%", justifyContent: "flex-end", margin: 5}}
               >
                 <View style={styles.button}>
