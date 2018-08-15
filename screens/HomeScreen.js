@@ -112,6 +112,7 @@ export default class HomeScreen extends Component {
               <TouchableOpacity
                 onPress={()=> this.createAccount()}
                 style={{width: "48.5%", justifyContent: "flex-start", margin: 5}}
+
               >
                 <View style={styles.button}>
                   <Text>Create Account</Text>
