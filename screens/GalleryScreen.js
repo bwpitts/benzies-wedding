@@ -1,13 +1,19 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity, Platform} from 'react-native';
+import { ImagePicker, Icon } from 'expo';
 import * as firebase from 'firebase'
+import CameraButton from '../components/CameraButton'
 
 export default class GalleryScreen extends React.Component {
   static navigationOptions = {
-    title: 'app.json',
+    title: 'Gallery',
+    headerRight: <CameraButton/>
   };
 
-  state = { currentUser: null };
+  state = {
+      currentUser: null,
+      image: null
+  };
 
   componentDidMount() {
     const {currentUser} = firebase.auth();
@@ -21,6 +27,7 @@ export default class GalleryScreen extends React.Component {
             <Text>
                 Hi {currentUser && currentUser.email}!
             </Text>
+
         </View>
     )
   }
