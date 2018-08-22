@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import * as firebase from 'firebase'
 
-export default class SettingsScreen extends React.Component {
+export default class GalleryScreen extends React.Component {
   static navigationOptions = {
     title: 'app.json',
   };

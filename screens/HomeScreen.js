@@ -99,11 +99,9 @@ render() {
                     </View>
 
                     <View style={styles.getStartedContainer}>
-
-                        <Text style={styles.getStartedText}>Get started by logging in</Text>
                         {this.state.errorMessage &&
-                        <Text style={{ color: 'red' }}>
-                            {this.state.errorMessage}
+                        <Text style={{ color: 'red', fontWeight: "bold", fontSize: 16 }}>
+                        {this.state.errorMessage}
                         </Text>}
                         <TextInput
                             style={styles.textInput}

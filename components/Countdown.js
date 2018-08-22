@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import CountDown from 'react-native-countdown-component';
 
 export default class CountDownComponent extends React.Component {
     render(){
         let today = new Date();
-        let weddingDate = new Date("2019-09-24");
+        let weddingDate = new Date("2019-09-24T18:00:00");
         let until = (weddingDate.getTime() - today.getTime())/1000;
         return (
             <View>
@@ -13,7 +13,8 @@ export default class CountDownComponent extends React.Component {
                     until={until}
                     onFinish={() => alert("We did it")}
                     onPress={() => alert("Until WDay")}
-                    size={20}
+                    size={15}
+                    digitBgColor="#ddd"
                 />
             </View>
         );

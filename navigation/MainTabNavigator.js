@@ -4,9 +4,9 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import InfoScreen from '../screens/InfoScreen';
 import RegistryScreen from '../screens/RegistryScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import GalleryScreen from '../screens/GalleryScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -26,11 +26,11 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const InfoStack = createStackNavigator({
+  Links: InfoScreen,
 });
 
-LinksStack.navigationOptions = {
+InfoStack.navigationOptions = {
   tabBarLabel: 'Info',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -54,11 +54,11 @@ RegistryStack.navigationOptions = {
     ),
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+const GalleryStack = createStackNavigator({
+  Settings: GalleryScreen,
 });
 
-SettingsStack.navigationOptions = {
+GalleryStack.navigationOptions = {
   tabBarLabel: 'Photos',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -70,7 +70,7 @@ SettingsStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
+  InfoStack,
   RegistryStack,
-  SettingsStack,
+  GalleryStack,
 });
