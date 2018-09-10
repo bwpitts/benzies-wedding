@@ -68,19 +68,6 @@ authentication(){
         })
 }
 
-createAccount(){
-    firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .then((data) => {
-            this.setState({errorMessage: null, currentUser: currentuser});
-            alert("Successfully Created Account");
-        })
-        .catch(error => {
-            this.setState({errorMessage: error.message});
-        })
-}
-
 forgotPassword(){
   firebase
       .auth()
