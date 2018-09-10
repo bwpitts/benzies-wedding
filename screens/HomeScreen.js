@@ -35,7 +35,8 @@ constructor(props){
     this.state = {
         email: '',
         password: '',
-        errorMessage: null
+        errorMessage: null,
+        currentUser: null
     }
 }
 
@@ -46,6 +47,12 @@ componentWillMount(){
             <ActivityIndicator size="large" />
         </View>
     )
+}
+
+componentDidMount(){
+    const {currentUser} = firebase.auth();
+    this.setState({currentUser});
+    this.loggedIn();
 }
 
 authentication(){
@@ -66,7 +73,7 @@ createAccount(){
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then((data) => {
-            this.setState({errorMessage: null});
+            this.setState({errorMessage: null, currentUser: currentuser});
             alert("Successfully Created Account");
         })
         .catch(error => {
@@ -84,9 +91,11 @@ forgotPassword(){
       });
 }
 
-render() {
-    return (
-        <View style={styles.container}>
+loggedIn(props){
+    if (this.state.currentUser !== null){
+        return (<View style={{marginTop:20}}><Text>{this.state.currentUser}</Text></View>)
+    } else {
+        return (
             <ImageBackground
                 source={require('../assets/images/_57A5994.jpg')}
                 style={styles.backgroundImage}>
@@ -101,7 +110,7 @@ render() {
                     <View style={styles.getStartedContainer}>
                         {this.state.errorMessage &&
                         <Text style={{ color: 'red', fontWeight: "bold", fontSize: 16 }}>
-                        {this.state.errorMessage}
+                            {this.state.errorMessage}
                         </Text>}
                         <TextInput
                             style={styles.textInput}
@@ -129,18 +138,8 @@ render() {
 
                         <View style={{flexDirection: "row"}}>
                             <TouchableOpacity
-                                onPress={()=> this.createAccount()}
-                                style={{width: "48.5%", justifyContent: "flex-start", margin: 5}}
-
-                            >
-                                <View style={styles.button}>
-                                    <Text>Create Account</Text>
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
                                 onPress={()=> this.forgotPassword()}
-                                style={{width: "48.5%", justifyContent: "flex-end", margin: 5}}
+                                style={{width: "100%", margin: 5}}
                             >
                                 <View style={styles.button}>
                                     <Text>Forgot Password</Text>
@@ -151,6 +150,14 @@ render() {
 
                 </View>
             </ImageBackground>
+        )
+    }
+}
+
+render() {
+    return (
+        <View style={styles.container}>
+            {this.loggedIn()}
         </View>
     );
 }
