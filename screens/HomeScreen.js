@@ -52,7 +52,7 @@ componentWillMount(){
 componentDidMount(){
     const {currentUser} = firebase.auth();
     this.setState({currentUser});
-    this.loggedIn();
+    this.loggedIn(currentUser);
 }
 
 authentication(){
@@ -61,7 +61,12 @@ authentication(){
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then((data) => {
             this.setState({errorMessage: null});
+            this.setState({currentUser: data.user.email});
+            console.log(data);
             alert("Successfully Logged In");
+        })
+        .then((data) => {
+            this.loggedIn(this.state);
         })
         .catch(error => {
             this.setState({errorMessage: error.message});
