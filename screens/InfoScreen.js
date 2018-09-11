@@ -1,8 +1,13 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Text, Linking} from 'react-native';
-import CountDownComponent from "../components/Countdown"
-import { MapView } from 'expo';
-import { Marker } from 'react-native-maps';
+import {
+    ScrollView,
+    TouchableOpacity,
+    Image,
+    StyleSheet,
+    View,
+    Text,
+    Linking
+} from 'react-native';
 
 export default class InfoScreen extends React.Component {
   static navigationOptions = {
@@ -11,9 +16,7 @@ export default class InfoScreen extends React.Component {
 
   constructor(props){
     super(props);
-    this.state= {
-      currentUser: null
-    };
+
   }
 
 
@@ -23,68 +26,44 @@ export default class InfoScreen extends React.Component {
         <View style={styles.section}>
           <Text style={styles.header}>Date:</Text>
           <Text>August 16, 2019</Text>
-          <Text>Ceremony starting at 6:30 pm</Text>
-          <CountDownComponent/>
+          <Text>Ceremony 6:00 pm</Text>
         </View>
         <View style={styles.section}>
             <Text style={styles.header}>Location:</Text>
             <Text>Chesapeake Bay Beach Club</Text>
-            <MapView style={{width: 300, height: 200, borderWidth: .5, borderRadius: 10}}
-            initialRegion={{
-                latitude: 38.9781,
-                longitude: -76.3337,
-                latitudeDelta: .03,
-                longitudeDelta: .03
-            }}
-            onPress={()=> Linking.openURL("https://goo.gl/maps/Y34xRmzRyMG2")}
+            <TouchableOpacity
+                onPress={()=> Linking.openURL("https://www.baybeachclub.com/reservations")}
             >
-                <MapView.Marker
-                    coordinate={{
-                        latitude:38.9781,
-                        longitude:-76.3337
-                    }}/>
-            </MapView>
+                <Image
+                    source={require('../assets/images/Chesapeake-Bay-Beach-Club-Wedding.jpg')}
+                    style={{width: 300, height: 200, borderWidth: .5, borderRadius: 10}}
+                />
+            </TouchableOpacity>
         </View>
         <View style={styles.section}>
           <Text style={styles.header}>Hotels:</Text>
           <Text>The Inn at the Chesapeake Bay Beach Club & Spa</Text>
-          <Text>$199 a night</Text>
           <Text style={styles.link} onPress={() => Linking.openURL('https://www.baybeachclub.com/reservations')}>Check it out here</Text>
-            <MapView style={{width: 300, height: 200, borderWidth: .5, borderRadius: 10}}
-                     initialRegion={{
-                         latitude: 38.9792,
-                         longitude: -76.3279,
-                         latitudeDelta: 0.03,
-                         longitudeDelta: 0.03
-                     }}
-                     onPress={()=> Linking.openURL("https://goo.gl/maps/Gt7fpvLVJEG2")}
+            <TouchableOpacity
+                     onPress={()=> Linking.openURL("https://www.baybeachclub.com/reservations")}
             >
-                <MapView.Marker
-                    coordinate={{
-                        latitude:38.9792,
-                        longitude:-76.3279
-                    }}/>
-            </MapView>
+                <Image
+                    source={require('../assets/images/The-Inn-At-CBBC.png')}
+                    style={{width: 300, height: 200, borderWidth: .5, borderRadius: 10}}
+                />
+            </TouchableOpacity>
         </View>
       <View style={styles.section}>
-          <Text>Hampton Inn & Suites</Text>
-          <Text>$100 a night</Text>
-          <Text style={styles.link} onPress={() => Linking.openURL('https://hamptoninn3.hilton.com/en/hotels/virginia/hampton-inn-and-suites-leesburg-WASLBHX/index.html')}>Check it out here</Text>
-          <MapView style={{width: 300, height: 200, borderWidth: .5, borderRadius: 10}}
-                   initialRegion={{
-                       latitude: 39.1078603,
-                       longitude: -77.5433514,
-                       latitudeDelta: 0.03,
-                       longitudeDelta: 0.03
-                   }}
-                   onPress={()=> Linking.openURL("https://goo.gl/maps/mixbU2YdFM92")}
+          <Text>The Westin</Text>
+          <Text style={styles.link} onPress={() => Linking.openURL('https://www.reservationcounter.com/hotels/show/600b12e/the-westin-annapolis-annapolis-md/?cid=sem::TPRC::AW::::::the%20westin%20annapolis::e&creative=267122271763&device=c&AdPos=1t2&utm_source=google&utm_medium=cpc&utm_term=the%20westin%20annapolis&utm_campaign=&iv_=__iv_p_1_a_981240470_g_53297083125_w_kwd-302618507886_h_9007893_ii__d_c_v__n_g_c_267122271763_k_the%20westin%20annapolis_m_e_l__t__e__r_1t2_vi__')}>Check it out here</Text>
+          <TouchableOpacity
+              onPress={()=> Linking.openURL("https://www.reservationcounter.com/hotels/show/600b12e/the-westin-annapolis-annapolis-md/?cid=sem::TPRC::AW::::::the%20westin%20annapolis::e&creative=267122271763&device=c&AdPos=1t2&utm_source=google&utm_medium=cpc&utm_term=the%20westin%20annapolis&utm_campaign=&iv_=__iv_p_1_a_981240470_g_53297083125_w_kwd-302618507886_h_9007893_ii__d_c_v__n_g_c_267122271763_k_the%20westin%20annapolis_m_e_l__t__e__r_1t2_vi__")}
           >
-              <MapView.Marker
-                  coordinate={{
-                      latitude:39.1078603,
-                      longitude:-77.5433514
-                  }}/>
-          </MapView>
+              <Image
+                  source={require('../assets/images/The-Westin.jpg')}
+                  style={{width: 300, height: 200, borderWidth: .5, borderRadius: 10}}
+              />
+          </TouchableOpacity>
       </View>
       </ScrollView>
     );

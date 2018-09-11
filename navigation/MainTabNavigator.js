@@ -7,6 +7,8 @@ import HomeScreen from '../screens/HomeScreen';
 import InfoScreen from '../screens/InfoScreen';
 import RegistryScreen from '../screens/RegistryScreen';
 import GalleryScreen from '../screens/GalleryScreen';
+import ItineraryScreen from '../screens/ItineraryScreen';
+import LogInScreen from '../screens/LogInScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -19,15 +21,15 @@ HomeStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          ? `ios-home${focused ? '' : '-outline'}`
+          : 'md-home'
       }
     />
   ),
 };
 
 const InfoStack = createStackNavigator({
-  Links: InfoScreen,
+  Info: InfoScreen,
 });
 
 InfoStack.navigationOptions = {
@@ -54,8 +56,22 @@ RegistryStack.navigationOptions = {
     ),
 };
 
+const ItineraryStack = createStackNavigator({
+    Itinerary: ItineraryScreen,
+});
+
+ItineraryStack.navigationOptions = {
+    tabBarLabel: 'Itinerary',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? `ios-time${focused ? '' : '-outline'}` : 'md-time'}
+        />
+    ),
+};
+
 const GalleryStack = createStackNavigator({
-  Settings: GalleryScreen,
+  Gallery: GalleryScreen,
 });
 
 GalleryStack.navigationOptions = {
@@ -68,9 +84,24 @@ GalleryStack.navigationOptions = {
   ),
 };
 
+const LogInStack = createStackNavigator({
+    LogIn: LogInScreen,
+});
+
+LogInStack.navigationOptions = {
+    tabBarLabel: 'Log In',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? `ios-login${focused ? '' : '-outline'}` : 'md-login'}
+        />
+    ),
+};
+
 export default createBottomTabNavigator({
-  HomeStack,
-  InfoStack,
-  RegistryStack,
-  GalleryStack,
+    HomeStack,
+    InfoStack,
+    RegistryStack,
+    ItineraryStack,
+    GalleryStack
 });
